@@ -1,0 +1,18 @@
+version: '3'
+services:
+  db:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data/db:/data/db
+  
+  api:
+    build: .
+    volumes:
+      - ./:/app
+    environment:
+      - PORT=3000
+    ports:
+      - "3000:3000"
+    command: "yarn dev"
