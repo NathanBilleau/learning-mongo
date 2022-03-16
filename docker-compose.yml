@@ -1,7 +1,7 @@
 version: '3'
 services:
   db:
-    image: mongo
+    image: mongo:4.4
     ports:
       - 27017:27017
     volumes:
@@ -9,6 +9,10 @@ services:
   
   api:
     build: .
+    depends_on:
+      - db
+    links:
+      - db
     volumes:
       - ./:/app
     environment:
